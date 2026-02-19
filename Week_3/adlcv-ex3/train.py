@@ -9,6 +9,7 @@ from gpt import AndersenGPT
 from torch import nn
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
+from pathlib import Path
 
 # -----------------------
 # Hyperparameters & Configs
@@ -164,7 +165,8 @@ def main(
     model = model.to(device)
 
     if START_FROM_PRETRAINED_GPT2_CHECKPOINT:
-        model.load_state_dict(torch.load("gpt2_pretrained.pt"))
+        gpt_path = Path("/dtu/datasets1/02501/gpt2_pretrained.pt")
+        model.load_state_dict(torch.load(gpt_path))
 
     # Define the loss function for language modeling.
     # We ignore the padding token (which is now set to eos_token if needed)
